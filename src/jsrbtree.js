@@ -13,6 +13,7 @@ var jsrbtree = jsrbtree || {};
         this.left = null;
         this.right = null;
         this.count = 1;
+        this.red = true;
     };
     
     jss.Node = Node;
@@ -121,10 +122,52 @@ var jsrbtree = jsrbtree || {};
         }
         
         if(x != null) {
+            
+            if(this._isRed(x.right) && !this._isRed(x.left)) x = this._rotateLeft(x);
+            if(this._isRed(x.left) && this._isRed(x.left.left)) x = this._rotateRight(x);
+            if(this._isRed(x.left) && this._isRed(x.right)) this._flipColor(x);
+            
+            
             x.count = 1 + this._count(x.left) + this._count(x.right);
         }
         
         return x;
+    };
+    
+    RedBlackTree.prototype._isRed = function (x) {
+        return x == null ? false : x.red;
+    };
+    
+    RedBlackTree.prototype._flipColor = function(x) {
+        x.left.red = false;
+        x.right.red = false;
+        x.red = true;
+    };
+    
+    RedBlackTree.prototype._rotateLeft = function (x) {
+        var oldX = x;
+        var m = x.right;
+        oldX.right = m.left;
+        m.left = oldX;
+        m.red = oldX.red;
+        oldX.red = true;
+        
+        oldX.count = 1 + this._count(oldX.left) + this._count(oldX.right);
+        
+        return m;
+    };
+    
+    RedBlackTree.prototype._rotateRight = function (x) {
+        var oldX = x;
+        var m = oldX.left;
+        oldX.left = m.right;
+        m.right = oldX;
+        m.red = oldX.red;
+        oldX.red = true;
+        
+        oldX.count = 1 + this._count(oldX.left) + this._count(oldX.right);
+        
+        return m;
     };
     
     RedBlackTree.prototype._min = function (x) {
