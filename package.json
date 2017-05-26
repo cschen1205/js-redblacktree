@@ -1,6 +1,6 @@
 {
   "name": "js-redblacktree",
-  "version": "1.0.8",
+  "version": "1.0.9",
   "description": "Package implements left leaning red black balanced search tree for symbol table key-sorted map",
   "author": "Caishun Chen",
   "contributors": [
@@ -24,15 +24,13 @@
     "url": "git+https://github.com/cschen1205/js-redblacktree.git"
   },
   "keywords": [
-    "merge sort", 
-    "quick sort", 
-    "3 ways quick sort", 
-    "insertion sort", 
-    "selection sort", 
-    "shell sort", 
-    "heap sort", 
-    "array sorting",
-    "sorting algorthms"
+    "symbol table", 
+    "balanced search tree", 
+    "binary search tree", 
+    "sorted map", 
+    "hilbert deletion", 
+    "red black tree", 
+    "left leaning red black tree"
   ],
   "dependencies": {
     
