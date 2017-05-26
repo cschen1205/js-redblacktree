@@ -48,6 +48,7 @@ describe("Red Black Tree", function() {
         }
         
         var count = 100;
+        expect(bst.size()).to.equal(count);
         for(var i = 0; i < 100; i += 5) {
             bst.delete(i);
             count--;

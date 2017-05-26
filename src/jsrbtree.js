@@ -120,7 +120,9 @@ var jsrbtree = jsrbtree || {};
             }
         }
         
-        x.count = 1 + this._count(x.left) + this._count(x.right);
+        if(x != null) {
+            x.count = 1 + this._count(x.left) + this._count(x.right);
+        }
         
         return x;
     };
@@ -145,6 +147,8 @@ var jsrbtree = jsrbtree || {};
         }
         
         x.left = this._delMin(x.left);
+        
+        x.count = 1 + this._count(x.left) + this._count(x.right);
         
         return x;
     };
