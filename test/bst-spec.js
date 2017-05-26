@@ -35,6 +35,11 @@ describe("Red Black Tree", function() {
         expect(bst.size()).to.equal(4);
         expect(bst.containsKey(6));
         expect(bst.get(6)).to.equal(5.4);
+        
+        var keys = bst.keySet();
+        for(var i = 1; i < keys.length; ++i) {
+            expect(keys[i-1]).to.below(keys[i]);
+        }
     });
       
     it("should delete correctly", function () {

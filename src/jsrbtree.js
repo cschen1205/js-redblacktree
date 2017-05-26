@@ -196,6 +196,23 @@ var jsrbtree = jsrbtree || {};
         return x;
     };
     
+    RedBlackTree.prototype.keySet = function() {
+        var keys = [];
+        
+        this._collect(this.root, keys);
+        return keys;
+    };
+    
+    RedBlackTree.prototype._collect = function(x, queue) {
+        if (x == null) {
+            return;
+        }  
+        
+        this._collect(x.left, queue);
+        queue.push(x.key);
+        this._collect(x.right, queue);
+    };
+    
     jss.RedBlackTree = RedBlackTree;
     
 })(jsrbtree);

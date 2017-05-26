@@ -1,5 +1,5 @@
 # js-redblacktree
-Package provides javascript implementation of red black tree
+Package provides javascript implementation of red black tree. The api of the red black tree is designed so that it matches with the api of the Java counterpart SortedMap api.
 
 
 
@@ -41,5 +41,11 @@ console.log(bst.size()); // display 3
 console.log(bst.containsKey(6)); // display false;
 console.log(bst.get(6)); // display undefined
 
+// print out sorted keys
+
+var keys = bst.keySet();
+for(var i = 1; i < keys.length; ++i) {
+    console.log(keys[i]);
+}
 
 ```
