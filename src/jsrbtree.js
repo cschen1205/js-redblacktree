@@ -3,10 +3,6 @@ var jsrbtree = jsrbtree || {};
 (function (jss) {
     'use strict';
 	
-    jss.less = function (a1, a2, compare) {
-        return compare(a1, a2) < 0; 
-    };
-    
     var Node = function (key, value) {
         this.key = key;
         this.value = value;
@@ -45,6 +41,11 @@ var jsrbtree = jsrbtree || {};
         } else {
             x.value = value;
         }
+        
+        if(this._isRed(x.right) && !this._isRed(x.left)) x = this._rotateLeft(x);
+        if(this._isRed(x.left) && this._isRed(x.left.left)) x = this._rotateRight(x);
+        if(this._isRed(x.left) && this._isRed(x.right)) this._flipColor(x);
+        
         
         x.count = 1 + this._count(x.left) + this._count(x.right);
         
@@ -112,12 +113,10 @@ var jsrbtree = jsrbtree || {};
                 x = x.left;
             }
             else {
-                var m = this._min(x.right);
-
-                m.left = x.left;
-                m.right = this._delMin(x.right);
-
-                x = m;
+                var t = x;
+                x = this._min(t.right);
+                x.right = this._delMin(t.right);
+                x.left = t.left;
             }
         }
         
@@ -126,7 +125,6 @@ var jsrbtree = jsrbtree || {};
             if(this._isRed(x.right) && !this._isRed(x.left)) x = this._rotateLeft(x);
             if(this._isRed(x.left) && this._isRed(x.left.left)) x = this._rotateRight(x);
             if(this._isRed(x.left) && this._isRed(x.right)) this._flipColor(x);
-            
             
             x.count = 1 + this._count(x.left) + this._count(x.right);
         }
@@ -180,19 +178,43 @@ var jsrbtree = jsrbtree || {};
         return this._min(x.left);
     };
     
+    RedBlackTree.prototype._max = function (x) {
+        if (x == null) {
+            return null;
+        }  
+        if (x.right == null) {
+            return x;
+        }
+        return this._max(x.right);
+    };
+    
+    RedBlackTree.prototype.minKey = function (x) {
+        var x = this._min(this.root);
+        if (x != null) {
+            return x.key;
+        }
+        return undefined;
+    };
+    
+    RedBlackTree.prototype.maxKey = function(x) {
+        var x = this._max(this.root);
+        if (x != null) {
+            return x.key;
+        }
+        return undefined;
+    };
+    
     RedBlackTree.prototype._delMin = function (x) {
         if (x == null) {
             return null;
         }  
         
-        if (x.left = null) {
+        if (x.left == null) {
             return x.right;
         }
         
         x.left = this._delMin(x.left);
-        
         x.count = 1 + this._count(x.left) + this._count(x.right);
-        
         return x;
     };
     

@@ -5,6 +5,11 @@ Package provides javascript implementation of red black tree. The api of the red
 
 [![Build Status](https://travis-ci.org/cschen1205/js-redblacktree.svg?branch=master)](https://travis-ci.org/cschen1205/js-redblacktree) [![Coverage Status](https://coveralls.io/repos/github/cschen1205/js-redblacktree/badge.svg?branch=master)](https://coveralls.io/github/cschen1205/js-redblacktree?branch=master) 
 
+# Features
+
+* Balanced Search Tree with Left Leaning Red Black Tree
+* Customizable comparer function for keys
+
 
 # Install
 
@@ -48,4 +53,19 @@ for(var i = 1; i < keys.length; ++i) {
     console.log(keys[i]);
 }
 
+console.log(bst.minKey()); 
+console.log(bst.maxKey());
+
+```
+
+If you are handling key which requires custom comparer, you can do so in the constructor:
+
+```javascript
+var jsrbtree = require("js-redblacktree");
+
+var compare = function(a1, a2){
+    return a1 - a2;
+};
+
+var bst = new jsrbtree.RedBlackTree(compare);
 ```

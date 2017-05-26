@@ -1,6 +1,6 @@
 {
   "name": "js-redblacktree",
-  "version": "1.0.7",
+  "version": "1.0.8",
   "description": "Package implements left leaning red black balanced search tree for symbol table key-sorted map",
   "author": "Caishun Chen",
   "contributors": [
