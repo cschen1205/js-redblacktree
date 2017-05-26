@@ -4,26 +4,18 @@ var jsrbtree = require("../src/jsrbtree");
 describe("Red Black Tree", function() {
   describe("without customized comparer", function() {
       
-    var bst = jsrbtree.RedBlackTree();
-    
-    it("should sort ascedingly when no compare function is provided", function() {
-    	
-        var a = [3, 4, 5, 1, 2, 4, 6, 8, 9, 3, 4, 67, 34, 53, 44, 2];
-        jsrbtree.heapSort(a);
-        for(var i = 1; i < a.length; ++i){
-            expect(a[i-1]).not.to.above(a[i]);
-        }
-    });
+    var bst = new jsrbtree.RedBlackTree();
       
-    it("should sort ascedingly using the provided comparer", function() {
-    	
-        var a = [[3, 2.3], [4, 3.1], [5, 1.1], [1, 4.2], [2, 4.2], [4, 5.3], [6, 7.4], [8, 5.1], [9, 1.9], [3, 1.2], [4, 3.4], [67, 6.7], [34, 3], [53, 5], [44, 4.2], [2, 0]];
-        jsrbtree.heapSort(a, function(a1, a2){
-                 return a1[1] - a2[1];
-        });
-        for(var i = 1; i < a.length; ++i){
-            expect(a[i-1][1]).not.to.above(a[i][1]);
-        }
+    bst.put(2, 2.4);
+    bst.put(4, 3.2);
+    it("should store two values at this point", function() {
+        expect(bst.size()).to.equal(2);
+        expect(bst.get(2)).to.equal(2.4);
+        expect(bst.get(4)).to.equal(3.2);
+        expect(bst.isEmpty()).to.equal(false);
+        expect(bst.containsKey(2)).to.equal(true);
+        expect(bst.containsKey(4)).to.equal(true);
+        expect(bst.get(3)).to.equal(undefined);
     });
   });
          

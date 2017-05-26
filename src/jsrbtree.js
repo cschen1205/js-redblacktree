@@ -46,6 +46,8 @@ var jsrbtree = jsrbtree || {};
         }
         
         x.count = 1 + this._count(x.left) + this._count(x.right);
+        
+        return x;
     };
     
     RedBlackTree.prototype._count = function (x) {
@@ -80,11 +82,11 @@ var jsrbtree = jsrbtree || {};
     };
     
     RedBlackTree.prototype.isEmpty = function () {
-        return this._count(this.root) > 0;
+        return this._count(this.root) == 0;
     };
     
     RedBlackTree.prototype.size = function() {
-        this._count(this.root);  
+        return this._count(this.root);  
     };
     
     RedBlackTree.prototype.delete = function(key) {
@@ -103,19 +105,22 @@ var jsrbtree = jsrbtree || {};
             x.right = this._delete(x.right, key); 
         } else {
             if (x.left == null) {
-                return x.right;
+                x = x.right;
             }
-            if (x.right == null) {
-                return x.left;
+            else if (x.right == null) {
+                x = x.left;
             }
-            
-            var m = this._min(x.right);
-            
-            m.left = x.left;
-            m.right = this._delMin(x.right);
-            
-            return m;
+            else {
+                var m = this._min(x.right);
+
+                m.left = x.left;
+                m.right = this._delMin(x.right);
+
+                x = m;
+            }
         }
+        
+        x.count = 1 + this._count(x.left) + this._count(x.right);
         
         return x;
     };
