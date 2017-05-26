@@ -40,7 +40,10 @@ describe("Red Black Tree", function() {
     it("should delete correctly", function () {
         var bst = new jsrbtree.RedBlackTree();
         
-        for(var i = 0; i < 100; ++i) {
+        for(var i = 0; i < 100; i+=2) {
+            bst.put(i, i);
+        }
+        for(var i = 1; i < 100; i+=2) {
             bst.put(i, i);
         }
         
