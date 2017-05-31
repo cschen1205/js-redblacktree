@@ -239,6 +239,7 @@ var jsrbtree = jsrbtree || {};
     
 })(jsrbtree);
 
+var module = module || {};
 if(module) {
 	module.exports = jsrbtree;
 }
